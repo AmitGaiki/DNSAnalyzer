@@ -1,9 +1,7 @@
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.jnetpcap.packet.PcapPacket;
 
 
 public class ProtocolStateMachine {
@@ -42,7 +40,7 @@ public class ProtocolStateMachine {
 	
 	
 	public static void main(String[] args){
-		ProtocolStateMachine psm = new ProtocolStateMachine(5,"h2","~/","DNSPackets"); //4
+		ProtocolStateMachine psm = new ProtocolStateMachine(5,"h2","./db/","DNSPackets"); //4
 		try {
 			dbConnect.dropTable("Response");
 			dbConnect.dropTable("Referral");

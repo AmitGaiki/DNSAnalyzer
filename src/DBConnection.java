@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.Properties;
+import service.PropertiesConfig;
 
 
 
@@ -23,9 +24,10 @@ public class DBConnection {
 	}
 	
 	DBConnection(String dbms,String location,String dbname){
+		PropertiesConfig config = new PropertiesConfig();
 		this.connect  = null;
-		this.username = "";
-		this.password = "";
+		this.username = config.getProperty("username");
+		this.password = config.getProperty("password");
 		this.dbms = dbms;
 		this.location = location;
 		this.dbname = dbname;
