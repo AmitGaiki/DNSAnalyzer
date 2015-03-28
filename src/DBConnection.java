@@ -24,7 +24,7 @@ public class DBConnection {
 	
 	DBConnection(String dbms,String location,String dbname){
 		this.connect  = null;
-		this.username = "Atmika";
+		this.username = "";
 		this.password = "";
 		this.dbms = dbms;
 		this.location = location;
