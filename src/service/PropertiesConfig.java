@@ -38,7 +38,6 @@ public class PropertiesConfig {
 		try {
 			prop = getPropertiesFile();
 			String value = prop.getProperty(key);
-			System.out.println(value);
 			return value;
 		} catch (IOException ex) {
 			Logger.getLogger(PropertiesConfig.class.getName()).log(Level.SEVERE, null, ex);
