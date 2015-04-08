@@ -23,8 +23,10 @@ a.State : This class represents a state in the machine.Each state is identified 
 
 b.Transition : This class represents a transition from one state to the next. Each transition has a start and an end state. The transition occurs between these two state. It implements the Observer interface and overrides the "update" method to update the begin and end state for each trasition and also execute the exit action of the start state and the entry action of the end state. 
 
-c.TransitionSupport : This class represents the set of parameters to be passed to the update method of the corresponding transition. The parameters include the start state, the end state and the set of arguments (if any), along with their number, required to execute the "exit" action of the start state and the "entry" action of the end state. 
+c.TransitionSupport : This class represents the set of parameters to be passed to the update method of the corresponding transition. The parameters include the start state, the end state and the set of arguments (if any), along with their number, required to execute the exit action of the start state and the entry action of the end state. 
 
 d.StateMachine : This class represent the protocol state machine. A state machine consists of a number of different states(instances of the class State): initial state("Initial"), end state("End") and intermediary states("A","B",..).it also defines a "current state", which could be assigned any of these states. It extends the Observable class and can be observed by any instance of a class that implements Observer, such as Transition. The state machine notifies the observer when there is a change in the current state,i.e.,current state is set to a new state.
 
+e.Activity : This class consists of static methods corresponding to the entry, exit and in-state action of each state of the state machine. These methods are passed to their corresponding states through "reflection"(java.lang.reflect)
 
+f.DBConnection : This class represents the connection to a DB. It consists of methods for creation of schema and tables, deletion of tables, insertion and retrieval of data. These methods pass SQL command to the h2 Driver which performs the appropriate operation and returns results (if any).
