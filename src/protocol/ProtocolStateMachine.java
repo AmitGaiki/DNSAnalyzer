@@ -11,7 +11,7 @@ public class ProtocolStateMachine {
 	static Packet currentPacket;
 	static HashMap<String,Long> Queries;
 	static  Hasher responsePackets;
-	final static String file = "data\\DNS_Traffic000.pcap";
+	final static String file = "./data/DNS_Traffic000.pcap";
 	final static long timeout = 60000;   //1 minute = 60,000 millisecond
 	static DBConnection dbConnect;
 	
