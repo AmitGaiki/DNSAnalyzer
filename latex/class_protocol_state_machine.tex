@@ -1,0 +1,68 @@
+\hypertarget{class_protocol_state_machine}{\section{Protocol\-State\-Machine Class Reference}
+\label{class_protocol_state_machine}\index{Protocol\-State\-Machine@{Protocol\-State\-Machine}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \hyperlink{class_protocol_state_machine_ab16976efe8017a6cf4b7bac29fa6a5bd}{is\-Time\-Out} (long timer, long time)
+\item 
+static void \hyperlink{class_protocol_state_machine_ab210fe7d2c2a4ce4c4120cdb70b8b6fd}{set\-Current\-Packet} (\hyperlink{class_packet}{Packet} packet)
+\item 
+static void \hyperlink{class_protocol_state_machine_af033fb0f497cbf5c1c3e006fb09cf966}{main} (String\mbox{[}$\,$\mbox{]} args)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains fields for objects \hyperlink{class_state}{State} Machine, \hyperlink{class_transition}{Transition}, \hyperlink{class_packet}{Packet} and Connection. \begin{DoxyAuthor}{Author}
+amit 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_protocol_state_machine_ab16976efe8017a6cf4b7bac29fa6a5bd}{\index{Protocol\-State\-Machine@{Protocol\-State\-Machine}!is\-Time\-Out@{is\-Time\-Out}}
+\index{is\-Time\-Out@{is\-Time\-Out}!ProtocolStateMachine@{Protocol\-State\-Machine}}
+\subsubsection[{is\-Time\-Out}]{\setlength{\rightskip}{0pt plus 5cm}static boolean Protocol\-State\-Machine.\-is\-Time\-Out (
+\begin{DoxyParamCaption}
+\item[{long}]{timer, }
+\item[{long}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_protocol_state_machine_ab16976efe8017a6cf4b7bac29fa6a5bd}
+checks whether the process has exceeded time limit 
+\begin{DoxyParams}{Parameters}
+{\em timer} & \\
+\hline
+{\em time} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if time exceeds timeout else false 
+\end{DoxyReturn}
+\hypertarget{class_protocol_state_machine_af033fb0f497cbf5c1c3e006fb09cf966}{\index{Protocol\-State\-Machine@{Protocol\-State\-Machine}!main@{main}}
+\index{main@{main}!ProtocolStateMachine@{Protocol\-State\-Machine}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}static void Protocol\-State\-Machine.\-main (
+\begin{DoxyParamCaption}
+\item[{String\mbox{[}$\,$\mbox{]}}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_protocol_state_machine_af033fb0f497cbf5c1c3e006fb09cf966}
+main method for the program 
+\begin{DoxyParams}{Parameters}
+{\em args} & array of strings as command line arguments \\
+\hline
+\end{DoxyParams}
+(psm.\-S\-M.\-get\-Current\-State().equals(psm.\-S\-M.\-get\-End\-State())) \hypertarget{class_protocol_state_machine_ab210fe7d2c2a4ce4c4120cdb70b8b6fd}{\index{Protocol\-State\-Machine@{Protocol\-State\-Machine}!set\-Current\-Packet@{set\-Current\-Packet}}
+\index{set\-Current\-Packet@{set\-Current\-Packet}!ProtocolStateMachine@{Protocol\-State\-Machine}}
+\subsubsection[{set\-Current\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}static void Protocol\-State\-Machine.\-set\-Current\-Packet (
+\begin{DoxyParamCaption}
+\item[{{\bf Packet}}]{packet}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_protocol_state_machine_ab210fe7d2c2a4ce4c4120cdb70b8b6fd}
+setter for \hyperlink{class_packet}{Packet} field 
+\begin{DoxyParams}{Parameters}
+{\em instance} & of class \hyperlink{class_packet}{Packet} \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/Protocol\-State\-Machine.\-java\end{DoxyCompactItemize}

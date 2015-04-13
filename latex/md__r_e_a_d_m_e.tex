@@ -1,0 +1,31 @@
+Analysis of D\-N\-S traffic
+
+The project attempts to analyze D\-N\-S Packets captured using Wireshark and sort and store them based on errors or delay in arrival of packets.
+
+Libraries used \-: jnetpcap , h2\-Database
+
+The project consists of the following classes\-:
+
+1.\-Packet \-: This class extends the Pcap\-Packet class (org.\-jnetpcap.\-packet.\-Pcap\-Packet) and implements the Serializable interface.
+
+2.\-Pcap\-Reader \-: This class consists of methods that can read the .pcap file (obtained from Wireshark) and return lists of packets(instances of the class Packet) or specific packets.
+
+3.\-Payload\-Retriever \-: This class provides the method to obtain the D\-N\-S payload from the packet.
+
+4.\-D\-N\-S\-Wrapper \-: This class consists of all the methods required to obtain various fields from the D\-N\-S payload of the captured packet.
+
+5.\-Protocol\-State\-Machine \-: This class contains the main method that builds the protocol state machine, creates the D\-B and tables required to store the packets and runs each packet through the machine.
+
+The following classes are required for the construction of the Protocol State Machine\-:
+
+a.\-State \-: This class represents a state in the machine.\-Each state is identified by a label(A,B..) and includes actions to be carried out when entering into the state(entry action), exiting from the state(exit action) and in the state(in-\/state action), in the form of methods.
+
+b.\-Transition \-: This class represents a transition from one state to the next. Each transition has a start and an end state. The transition occurs between these two state. It implements the Observer interface and overrides the \char`\"{}update\char`\"{} method to update the begin and end state for each trasition and also execute the exit action of the start state and the entry action of the end state.
+
+c.\-Transition\-Support \-: This class represents the set of parameters to be passed to the update method of the corresponding transition. The parameters include the start state, the end state and the set of arguments (if any), along with their number, required to execute the exit action of the start state and the entry action of the end state.
+
+d.\-State\-Machine \-: This class represent the protocol state machine. A state machine consists of a number of different states(instances of the class State)\-: initial state(\char`\"{}\-Initial\char`\"{}), end state(\char`\"{}\-End\char`\"{}) and intermediary states(\char`\"{}\-A\char`\"{},\char`\"{}\-B\char`\"{},..).it also defines a \char`\"{}current state\char`\"{}, which could be assigned any of these states. It extends the Observable class and can be observed by any instance of a class that implements Observer, such as Transition. The state machine notifies the observer when there is a change in the current state,i.\-e.,current state is set to a new state.
+
+e.\-Activity \-: This class consists of static methods corresponding to the entry, exit and in-\/state action of each state of the state machine. These methods are passed to their corresponding states through \char`\"{}reflection\char`\"{}(java.\-lang.\-reflect)
+
+f.\-D\-B\-Connection \-: This class represents the connection to a D\-B. It consists of methods for creation of schema and tables, deletion of tables, insertion and retrieval of data. These methods pass S\-Q\-L command to the h2 Driver which performs the appropriate operation and returns results (if any). 

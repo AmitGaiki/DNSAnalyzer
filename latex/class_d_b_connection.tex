@@ -1,0 +1,175 @@
+\hypertarget{class_d_b_connection}{\section{D\-B\-Connection Class Reference}
+\label{class_d_b_connection}\index{D\-B\-Connection@{D\-B\-Connection}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String \hyperlink{class_d_b_connection_a5db915c711a7fe87b76839db531b045a}{get\-D\-B\-Name} ()
+\item 
+Connection \hyperlink{class_d_b_connection_ad931f04e763064e0783ac6b812e71380}{get\-Connect} ()
+\item 
+void \hyperlink{class_d_b_connection_ac3c0a6e8676f9b4e4197088c3a2cee2b}{set\-Properties} ()
+\item 
+Connection \hyperlink{class_d_b_connection_abf660ee4c1d0c01371b9aaebb95bffda}{get\-Connection} ()
+\item 
+void \hyperlink{class_d_b_connection_a9ff0b2dbf7570e376582d966c631aefb}{create\-Schema} (String schemaname)  throws S\-Q\-L\-Exception
+\item 
+void \hyperlink{class_d_b_connection_a04648cfe383fc86dab0b7c89040cc2a3}{drop\-Table} (String table\-Name)  throws S\-Q\-L\-Exception
+\item 
+void \hyperlink{class_d_b_connection_a52ec5e8f563ccab29045a874d5727ac6}{create\-Table} (String table\-Name, String columns)  throws S\-Q\-L\-Exception 
+\item 
+void \hyperlink{class_d_b_connection_a7df51ca3564584b74dd970c1b0fa06fe}{populate\-Table} (String table\-Name, Object...\-parameters)  throws S\-Q\-L\-Exception 
+\item 
+Result\-Set \hyperlink{class_d_b_connection_ae45cfcbf6f06447c03a32fddb75f3b4e}{retrieve\-Result\-Set} (String table\-Name, String columns, String conditions)  throws S\-Q\-L\-Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class creates connections to the database by taking the required parameters in constructor. \begin{DoxyAuthor}{Author}
+amit 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_d_b_connection_a9ff0b2dbf7570e376582d966c631aefb}{\index{D\-B\-Connection@{D\-B\-Connection}!create\-Schema@{create\-Schema}}
+\index{create\-Schema@{create\-Schema}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{create\-Schema}]{\setlength{\rightskip}{0pt plus 5cm}void D\-B\-Connection.\-create\-Schema (
+\begin{DoxyParamCaption}
+\item[{String}]{schemaname}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception}}\label{class_d_b_connection_a9ff0b2dbf7570e376582d966c631aefb}
+creates schema in the database with given name 
+\begin{DoxyParams}{Parameters}
+{\em schemaname} & name of schema to be created in the database \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & thrown when creation of schema fails. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_d_b_connection_a52ec5e8f563ccab29045a874d5727ac6}{\index{D\-B\-Connection@{D\-B\-Connection}!create\-Table@{create\-Table}}
+\index{create\-Table@{create\-Table}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{create\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void D\-B\-Connection.\-create\-Table (
+\begin{DoxyParamCaption}
+\item[{String}]{table\-Name, }
+\item[{String}]{columns}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception}}\label{class_d_b_connection_a52ec5e8f563ccab29045a874d5727ac6}
+creates table in the database with given name 
+\begin{DoxyParams}{Parameters}
+{\em table\-Name} & name of the table to be created \\
+\hline
+{\em columns} & columns in the given tablename \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & thrown when creation of table fails. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_d_b_connection_a04648cfe383fc86dab0b7c89040cc2a3}{\index{D\-B\-Connection@{D\-B\-Connection}!drop\-Table@{drop\-Table}}
+\index{drop\-Table@{drop\-Table}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{drop\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void D\-B\-Connection.\-drop\-Table (
+\begin{DoxyParamCaption}
+\item[{String}]{table\-Name}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception}}\label{class_d_b_connection_a04648cfe383fc86dab0b7c89040cc2a3}
+drops the table from database with the given name 
+\begin{DoxyParams}{Parameters}
+{\em table\-Name} & name of table to drop in database \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & thrown when dropping of table fails. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_d_b_connection_ad931f04e763064e0783ac6b812e71380}{\index{D\-B\-Connection@{D\-B\-Connection}!get\-Connect@{get\-Connect}}
+\index{get\-Connect@{get\-Connect}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{get\-Connect}]{\setlength{\rightskip}{0pt plus 5cm}Connection D\-B\-Connection.\-get\-Connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_b_connection_ad931f04e763064e0783ac6b812e71380}
+\begin{DoxyReturn}{Returns}
+connection object to be used for all C\-R\-U\-D operations 
+\end{DoxyReturn}
+\hypertarget{class_d_b_connection_abf660ee4c1d0c01371b9aaebb95bffda}{\index{D\-B\-Connection@{D\-B\-Connection}!get\-Connection@{get\-Connection}}
+\index{get\-Connection@{get\-Connection}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{get\-Connection}]{\setlength{\rightskip}{0pt plus 5cm}Connection D\-B\-Connection.\-get\-Connection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_b_connection_abf660ee4c1d0c01371b9aaebb95bffda}
+\begin{DoxyReturn}{Returns}
+connection object after making successful connection to database 
+\end{DoxyReturn}
+\hypertarget{class_d_b_connection_a5db915c711a7fe87b76839db531b045a}{\index{D\-B\-Connection@{D\-B\-Connection}!get\-D\-B\-Name@{get\-D\-B\-Name}}
+\index{get\-D\-B\-Name@{get\-D\-B\-Name}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{get\-D\-B\-Name}]{\setlength{\rightskip}{0pt plus 5cm}String D\-B\-Connection.\-get\-D\-B\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_b_connection_a5db915c711a7fe87b76839db531b045a}
+\begin{DoxyReturn}{Returns}
+name of database file 
+\end{DoxyReturn}
+\hypertarget{class_d_b_connection_a7df51ca3564584b74dd970c1b0fa06fe}{\index{D\-B\-Connection@{D\-B\-Connection}!populate\-Table@{populate\-Table}}
+\index{populate\-Table@{populate\-Table}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{populate\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void D\-B\-Connection.\-populate\-Table (
+\begin{DoxyParamCaption}
+\item[{String}]{table\-Name, }
+\item[{Object...}]{parameters}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception}}\label{class_d_b_connection_a7df51ca3564584b74dd970c1b0fa06fe}
+populate the table with given tablename and attributes 
+\begin{DoxyParams}{Parameters}
+{\em table\-Name} & name of the table to add record to \\
+\hline
+{\em parameters} & all attributes for the corresponding columns in table \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & thrown when record creation fails. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_d_b_connection_ae45cfcbf6f06447c03a32fddb75f3b4e}{\index{D\-B\-Connection@{D\-B\-Connection}!retrieve\-Result\-Set@{retrieve\-Result\-Set}}
+\index{retrieve\-Result\-Set@{retrieve\-Result\-Set}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{retrieve\-Result\-Set}]{\setlength{\rightskip}{0pt plus 5cm}Result\-Set D\-B\-Connection.\-retrieve\-Result\-Set (
+\begin{DoxyParamCaption}
+\item[{String}]{table\-Name, }
+\item[{String}]{columns, }
+\item[{String}]{conditions}
+\end{DoxyParamCaption}
+) throws S\-Q\-L\-Exception}}\label{class_d_b_connection_ae45cfcbf6f06447c03a32fddb75f3b4e}
+get resultset object for a particular query executed. 
+\begin{DoxyParams}{Parameters}
+{\em table\-Name} & name of the table \\
+\hline
+{\em columns} & name of columns \\
+\hline
+{\em conditions} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+result set object after running the query on database 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\-Q\-L\-Exception} & thrown when resultset cannot be obtained. \\
+\hline
+\end{DoxyExceptions}
+\hypertarget{class_d_b_connection_ac3c0a6e8676f9b4e4197088c3a2cee2b}{\index{D\-B\-Connection@{D\-B\-Connection}!set\-Properties@{set\-Properties}}
+\index{set\-Properties@{set\-Properties}!DBConnection@{D\-B\-Connection}}
+\subsubsection[{set\-Properties}]{\setlength{\rightskip}{0pt plus 5cm}void D\-B\-Connection.\-set\-Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_d_b_connection_ac3c0a6e8676f9b4e4197088c3a2cee2b}
+set fields for username, password, database name and database file. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/D\-B\-Connection.\-java\end{DoxyCompactItemize}

@@ -1,11 +1,12 @@
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.jnetpcap.packet.PcapPacket;
 
-
+/**
+ * Contains fields for objects State Machine, Transition, Packet and Connection.
+ * @author amit
+ */
 public class ProtocolStateMachine {
 	StateMachine SM;
 	static int packetOffset = -1;
@@ -13,10 +14,16 @@ public class ProtocolStateMachine {
 	static Packet currentPacket;
 	static HashMap<String,Long> Queries;
 	static  Hasher responsePackets;
-	final static String file = "data\\DNS_Traffic000.pcap";
+	final static String file = "data/DNS_Traffic000.pcap";
 	final static long timeout = 60000;   //1 minute = 60,000 millisecond
 	static DBConnection dbConnect;
-	
+	/**
+	 * 
+	 * @param nost the number of transition states State Machine should have.
+	 * @param dbms database name in the format used in database url
+	 * @param location location of database file to be stored.
+	 * @param dbname name of the database that will be created
+	 */
 	ProtocolStateMachine(int nost,String dbms,String location,String dbname){
 		SM = new StateMachine(nost);
 		transit = new Transition();
@@ -29,20 +36,32 @@ public class ProtocolStateMachine {
 		dbConnect.getConnection();
 	}
 
+	/**
+	 * checks whether the process has exceeded time limit
+	 * @param timer
+	 * @param time
+	 * @return true if time exceeds timeout else false
+	 */
 	public static boolean isTimeOut(long timer,long time){
 		if(timer - time > timeout){
 			return true;
 		}
 		return false;
 	}
-	
+	/**
+	 * setter for Packet field
+	 * @param instance of class Packet
+	 */
 	public static void setCurrentPacket(Packet packet){
 		currentPacket = packet;
 	}
 	
-	
+	/**
+	 * main method for the program
+	 * @param args array of strings as command line arguments
+	 */
 	public static void main(String[] args){
-		ProtocolStateMachine psm = new ProtocolStateMachine(5,"h2","~/","DNSPackets"); //4
+		ProtocolStateMachine psm = new ProtocolStateMachine(5,"h2","./","DNSPackets"); //4
 		try {
 			dbConnect.createSchema(dbConnect.getDBName());
 			//dbConnect.dropTable("Response");

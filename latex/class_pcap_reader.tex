@@ -1,0 +1,80 @@
+\hypertarget{class_pcap_reader}{\section{Pcap\-Reader Class Reference}
+\label{class_pcap_reader}\index{Pcap\-Reader@{Pcap\-Reader}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Array\-List$<$ \hyperlink{class_packet}{Packet} $>$ \hyperlink{class_pcap_reader_a2b96ae4b1eeab28b808aa3bb2f6bcafd}{read\-File} (String filename, int num\-Of\-Packets)
+\item 
+static \hyperlink{class_packet}{Packet} \hyperlink{class_pcap_reader_a52de923b89cbe077fa30ab1fafc3d4c8}{read\-Packet} (String filename)
+\item 
+static \hyperlink{class_packet}{Packet} \hyperlink{class_pcap_reader_a3d07d30f780c0ecf09ab6b8d38930dbb}{read\-Packet} (String filename, int offset)
+\item 
+\hypertarget{class_pcap_reader_a3f57ae8d5071abdf1c3de086d2b1f892}{static void {\bfseries main} (String\mbox{[}$\,$\mbox{]} args)}\label{class_pcap_reader_a3f57ae8d5071abdf1c3de086d2b1f892}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class holds all methods for reading packets from a Pcap file. \begin{DoxyAuthor}{Author}
+amit 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_pcap_reader_a2b96ae4b1eeab28b808aa3bb2f6bcafd}{\index{Pcap\-Reader@{Pcap\-Reader}!read\-File@{read\-File}}
+\index{read\-File@{read\-File}!PcapReader@{Pcap\-Reader}}
+\subsubsection[{read\-File}]{\setlength{\rightskip}{0pt plus 5cm}static Array\-List$<${\bf Packet}$>$ Pcap\-Reader.\-read\-File (
+\begin{DoxyParamCaption}
+\item[{String}]{filename, }
+\item[{int}]{num\-Of\-Packets}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_pcap_reader_a2b96ae4b1eeab28b808aa3bb2f6bcafd}
+This methods reads the number of packets from the given file and returns list of packets. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & name of the pcap file \\
+\hline
+{\em num\-Of\-Packets} & total packets to read from the file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+list of packets read from the file 
+\end{DoxyReturn}
+\hypertarget{class_pcap_reader_a52de923b89cbe077fa30ab1fafc3d4c8}{\index{Pcap\-Reader@{Pcap\-Reader}!read\-Packet@{read\-Packet}}
+\index{read\-Packet@{read\-Packet}!PcapReader@{Pcap\-Reader}}
+\subsubsection[{read\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Packet} Pcap\-Reader.\-read\-Packet (
+\begin{DoxyParamCaption}
+\item[{String}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_pcap_reader_a52de923b89cbe077fa30ab1fafc3d4c8}
+This method is used to get a packet from the given pcap file 
+\begin{DoxyParams}{Parameters}
+{\em filename} & name of the pcap file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The retrieved packet 
+\end{DoxyReturn}
+\hypertarget{class_pcap_reader_a3d07d30f780c0ecf09ab6b8d38930dbb}{\index{Pcap\-Reader@{Pcap\-Reader}!read\-Packet@{read\-Packet}}
+\index{read\-Packet@{read\-Packet}!PcapReader@{Pcap\-Reader}}
+\subsubsection[{read\-Packet}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Packet} Pcap\-Reader.\-read\-Packet (
+\begin{DoxyParamCaption}
+\item[{String}]{filename, }
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_pcap_reader_a3d07d30f780c0ecf09ab6b8d38930dbb}
+This method reads and returns a packet from pcap file at a certain offset value in the file. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & name of the pcap file \\
+\hline
+{\em offset} & offset count from the start of file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+packet at the given offset location. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/Pcap\-Reader.\-java\end{DoxyCompactItemize}

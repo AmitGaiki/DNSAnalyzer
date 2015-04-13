@@ -2,7 +2,10 @@ import java.sql.*;
 import java.util.Properties;
 
 
-
+/**
+ * This class creates connections to the database by taking the required parameters in constructor.
+ * @author amit
+ */
 public class DBConnection {
 	
 	private Connection connect;
@@ -13,6 +16,14 @@ public class DBConnection {
 	private String dbname;
 	private String location;
 	
+	/**
+	 * use this constructor to provide all parameters including username and password
+	 * @param usnm username to be used in database
+	 * @param pswd password for accessing database
+	 * @param dbms name of database system to be used
+	 * @param location location to create database file
+	 * @param dbname name of database file
+	 */
 	DBConnection(String usnm,String pswd,String dbms,String location,String dbname){
 		this.connect  = null;
 		this.username = usnm;
@@ -22,6 +33,12 @@ public class DBConnection {
 		this.dbname = dbname;
 	}
 	
+	/**
+	 * use this constructor to provide parameters except username and password
+	 * @param dbms dbms name of database system to be used
+	 * @param location location to create database file
+	 * @param dbname name of database file
+	 */
 	DBConnection(String dbms,String location,String dbname){
 		this.connect  = null;
 		this.username = "Atmika";
@@ -31,14 +48,25 @@ public class DBConnection {
 		this.dbname = dbname;
 	}
 	
+	/**
+	 * 
+	 * @return name of database file
+	 */
 	public String getDBName(){
 		return this.dbname;
 	}
 	
+	/**
+	 * 
+	 * @return connection object to be used for all CRUD operations
+	 */
 	public Connection getConnect(){
 		return this.connect;
 	}
 	
+	/**
+	 * set fields for username, password, database name and database file.
+	 */
 	public void setProperties(){
 		connProperties.setProperty("Username", this.username);
 		connProperties.setProperty("Password", this.password);
@@ -46,6 +74,10 @@ public class DBConnection {
 		connProperties.setProperty("DBName",this.dbname);
 	}
 	
+	/**
+	 * 
+	 * @return connection object after making successful connection to database
+	 */
 	public Connection getConnection(){
 		connect = null;
 		connProperties = new Properties();
@@ -65,6 +97,11 @@ public class DBConnection {
 		return connect;
 	}
 	
+	/**
+	 * creates schema in the database with given name
+	 * @param schemaname name of schema to be created in the database
+	 * @throws SQLException thrown when creation of schema fails.
+	 */
 	public void createSchema(String schemaname) throws SQLException{
 		Statement stmt = null;
 	    try {
@@ -77,6 +114,11 @@ public class DBConnection {
 	    }
 	}
 	
+	/**
+	 * drops the table from database with the given name
+	 * @param tableName name of table to drop in database
+	 * @throws SQLException thrown when dropping of table fails.
+	 */
 	public void dropTable(String tableName) throws SQLException{
 		Statement stmt = null;
 	    try {
@@ -88,6 +130,13 @@ public class DBConnection {
 	        if (stmt != null) { stmt.close(); }
 	    }
 	}
+	
+	/**
+	 * creates table in the database with given name
+	 * @param tableName name of the table to be created
+	 * @param columns columns in the given tablename
+	 * @throws SQLException thrown when creation of table fails.
+	 */
 	public void createTable(String tableName,String columns) throws SQLException {//createString
 
 	    Statement stmt = null;
@@ -101,7 +150,12 @@ public class DBConnection {
 	        if (stmt != null) { stmt.close(); }
 	    }
 	}
-	
+	/**
+	 * populate the table with given tablename and attributes
+	 * @param tableName name of the table to add record to
+	 * @param parameters all attributes for the corresponding columns in table
+	 * @throws SQLException thrown when record creation fails.
+	 */
 	public void populateTable(String tableName,Object...parameters) throws SQLException {
 		int i;
 	    PreparedStatement pstmt = null;
@@ -122,6 +176,14 @@ public class DBConnection {
 	    }
 	}
 	
+	/**
+	 * get resultset object for a particular query executed.
+	 * @param tableName name of the table
+	 * @param columns name of columns
+	 * @param conditions
+	 * @return result set object after running the query on database
+	 * @throws SQLException thrown when resultset cannot be obtained.
+	 */
 	public ResultSet retrieveResultSet(String tableName,String columns,String conditions) throws SQLException {
 
 	    PreparedStatement pstmt = null;

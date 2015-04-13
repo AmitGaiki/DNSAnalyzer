@@ -1,0 +1,105 @@
+\hypertarget{class_state_machine}{\section{State\-Machine Class Reference}
+\label{class_state_machine}\index{State\-Machine@{State\-Machine}}
+}
+Inheritance diagram for State\-Machine\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_state_machine}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_state_machine_ad7ef0f4c2c7390eba41096b57025299c}{set\-Current\-State} (\hyperlink{class_transition_support}{Transition\-Support} t)
+\item 
+\hyperlink{class_state}{State} \hyperlink{class_state_machine_a31dc2fcca3fb09e8b004b9d21b7c6aa5}{get\-Initial\-State} ()
+\item 
+\hyperlink{class_state}{State} \hyperlink{class_state_machine_a8ec03fd0f1350838b05ea8765d0f012a}{get\-End\-State} ()
+\item 
+int \hyperlink{class_state_machine_a97dc1b3bc38a8d046035ef52dc8b2621}{get\-Numberof\-States} ()
+\item 
+\hyperlink{class_state}{State} \hyperlink{class_state_machine_afb2aab31dddcbefe3d4cb9eb5fdef61f}{get\-State} (String name)
+\item 
+\hyperlink{class_state}{State} \hyperlink{class_state_machine_adfe7ca2ef6ac4763ad49fde662564ec1}{get\-Current\-State} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that stores initial state, current state, end state, all transition states and total number of possible states \begin{DoxyAuthor}{Author}
+amit 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_state_machine_adfe7ca2ef6ac4763ad49fde662564ec1}{\index{State\-Machine@{State\-Machine}!get\-Current\-State@{get\-Current\-State}}
+\index{get\-Current\-State@{get\-Current\-State}!StateMachine@{State\-Machine}}
+\subsubsection[{get\-Current\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} State\-Machine.\-get\-Current\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_adfe7ca2ef6ac4763ad49fde662564ec1}
+getter for current state \begin{DoxyReturn}{Returns}
+current state of the state machine. 
+\end{DoxyReturn}
+\hypertarget{class_state_machine_a8ec03fd0f1350838b05ea8765d0f012a}{\index{State\-Machine@{State\-Machine}!get\-End\-State@{get\-End\-State}}
+\index{get\-End\-State@{get\-End\-State}!StateMachine@{State\-Machine}}
+\subsubsection[{get\-End\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} State\-Machine.\-get\-End\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_a8ec03fd0f1350838b05ea8765d0f012a}
+getter for end state. \begin{DoxyReturn}{Returns}
+end state for this state machine 
+\end{DoxyReturn}
+\hypertarget{class_state_machine_a31dc2fcca3fb09e8b004b9d21b7c6aa5}{\index{State\-Machine@{State\-Machine}!get\-Initial\-State@{get\-Initial\-State}}
+\index{get\-Initial\-State@{get\-Initial\-State}!StateMachine@{State\-Machine}}
+\subsubsection[{get\-Initial\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} State\-Machine.\-get\-Initial\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_a31dc2fcca3fb09e8b004b9d21b7c6aa5}
+getter for initial state. \begin{DoxyReturn}{Returns}
+initial state of this state machine 
+\end{DoxyReturn}
+\hypertarget{class_state_machine_a97dc1b3bc38a8d046035ef52dc8b2621}{\index{State\-Machine@{State\-Machine}!get\-Numberof\-States@{get\-Numberof\-States}}
+\index{get\-Numberof\-States@{get\-Numberof\-States}!StateMachine@{State\-Machine}}
+\subsubsection[{get\-Numberof\-States}]{\setlength{\rightskip}{0pt plus 5cm}int State\-Machine.\-get\-Numberof\-States (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_a97dc1b3bc38a8d046035ef52dc8b2621}
+getter for total number of states for this state machine \begin{DoxyReturn}{Returns}
+total number of states 
+\end{DoxyReturn}
+\hypertarget{class_state_machine_afb2aab31dddcbefe3d4cb9eb5fdef61f}{\index{State\-Machine@{State\-Machine}!get\-State@{get\-State}}
+\index{get\-State@{get\-State}!StateMachine@{State\-Machine}}
+\subsubsection[{get\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} State\-Machine.\-get\-State (
+\begin{DoxyParamCaption}
+\item[{String}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_afb2aab31dddcbefe3d4cb9eb5fdef61f}
+getter for a particular state according to state name 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the state to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+state as per name in parameter 
+\end{DoxyReturn}
+\hypertarget{class_state_machine_ad7ef0f4c2c7390eba41096b57025299c}{\index{State\-Machine@{State\-Machine}!set\-Current\-State@{set\-Current\-State}}
+\index{set\-Current\-State@{set\-Current\-State}!StateMachine@{State\-Machine}}
+\subsubsection[{set\-Current\-State}]{\setlength{\rightskip}{0pt plus 5cm}void State\-Machine.\-set\-Current\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf Transition\-Support}}]{t}
+\end{DoxyParamCaption}
+)}}\label{class_state_machine_ad7ef0f4c2c7390eba41096b57025299c}
+setter for current state. This method also notifies observers about the change in state. 
+\begin{DoxyParams}{Parameters}
+{\em t} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/State\-Machine.\-java\end{DoxyCompactItemize}

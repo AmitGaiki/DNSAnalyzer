@@ -8,11 +8,18 @@ import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 import org.jnetpcap.protocol.tcpip.Udp;
 
-
-
-
+/**
+ * This class holds all methods for reading packets from a Pcap file.
+ * @author amit
+ */
 public class PcapReader{
      
+	/**
+	 * This methods reads the number of packets from the given file and returns list of packets.
+	 * @param filename name of the pcap file
+	 * @param numOfPackets total packets to read from the file
+	 * @return list of packets read from the file
+	 */
      public static ArrayList<Packet> readFile(String filename,int numOfPackets){
     	 Pcap captor;
     	 StringBuilder errbuffer = new StringBuilder();
@@ -52,6 +59,11 @@ public class PcapReader{
 	return packetList;
 	}
      
+	 /**
+	  * This method is used to get a packet from the given pcap file
+	  * @param filename name of the pcap file
+	  * @return The retrieved packet
+	  */
      public static Packet readPacket(String filename){
     	 Pcap captor;
     	 StringBuilder errbuffer = new StringBuilder();
@@ -73,6 +85,12 @@ public class PcapReader{
 	
      }
      
+	 /**
+	  * This method reads and returns a packet from pcap file at a certain offset value in the file.
+	  * @param filename name of the pcap file
+	  * @param offset offset count from the start of file
+	  * @return packet at the given offset location.
+	  */
      public static Packet readPacket(String filename,int offset){
     	 Pcap captor;
     	 int i = 0;
