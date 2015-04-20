@@ -1,3 +1,11 @@
+package state;
+
+import pcap.PcapReader;
+import pcap.DNSWrapper;
+import pcap.PayloadRetriever;
+import state.TransitionSupport;
+import state.StateMachine;
+import state.ProtocolStateMachine;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -135,7 +143,7 @@ public class Activity {
 		}
 		//ProtocolStateMachine.responsePackets.add(DNSWrapper.getTransactionID(payload),ProtocolStateMachine.currentPacket);
 		if(DNSWrapper.getAnswerCount(payload) == 0 && DNSWrapper.getResourceRecordType(payload, DNSWrapper.getEndOfQuestionSection(payload)) == 2){
-			//SM.setCurrentState(new TransitionSupport(SM.getCurrentState(),SM.getState("A")));
+			//SM.setCurrentState(new TransitionSupport(stateMachine.getCurrentState(),stateMachine.getState("A")));
 			try {
 				//ProtocolStateMachine.dbConnect.populateTable("Referral",trID,new Long(time));
 				ProtocolStateMachine.dbConnect.populateTable("Packets",new Long(time),trID,"Referral",DNSWrapper.gettypeOfQuery(payload),DNSWrapper.isResponseServerAuthoritative(payload),DNSWrapper.isRecursionDesired(payload),DNSWrapper.isRecursionAvailable(payload),DNSWrapper.getResponseCode(payload),DNSWrapper.getQuestionCount(payload),DNSWrapper.getAnswerCount(payload),DNSWrapper.getAuthorityRecordCount(payload),DNSWrapper.getAdditionalRecordCount(payload),DNSWrapper.getQuestionName(payload),DNSWrapper.getRecordTypeToBeReturned(payload),DNSWrapper.getQuestionClass(payload),payload);

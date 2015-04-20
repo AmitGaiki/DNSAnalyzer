@@ -1,3 +1,6 @@
+package state;
+
+import state.State;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;

@@ -1,3 +1,5 @@
+package entity;
+
 import java.sql.*;
 import java.util.Properties;
 
@@ -24,7 +26,7 @@ public class DBConnection {
 	 * @param location location to create database file
 	 * @param dbname name of database file
 	 */
-	DBConnection(String usnm,String pswd,String dbms,String location,String dbname){
+	public DBConnection(String usnm,String pswd,String dbms,String location,String dbname){
 		this.connect  = null;
 		this.username = usnm;
 		this.password = pswd;
@@ -39,9 +41,9 @@ public class DBConnection {
 	 * @param location location to create database file
 	 * @param dbname name of database file
 	 */
-	DBConnection(String dbms,String location,String dbname){
+	public DBConnection(String dbms,String location,String dbname){
 		this.connect  = null;
-		this.username = "Atmika";
+		this.username = "";
 		this.password = "";
 		this.dbms = dbms;
 		this.location = location;

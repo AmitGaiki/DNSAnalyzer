@@ -1,4 +1,7 @@
+package state;
 
+
+import state.State;
 import java.util.Observable;
 
 /**

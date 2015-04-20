@@ -1,3 +1,6 @@
+package entity;
+
+import pcap.Packet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
