@@ -5,10 +5,12 @@
  */
 package main;
 
+import entity.DBConnection;
 import state.Activity;
 import state.StateMachine;
 import state.ProtocolStateMachine;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -21,15 +23,17 @@ public class Main {
 	 * @param args array of strings as command line arguments
 	 */
 	public static void main(String[] args){
-		ProtocolStateMachine psm = new ProtocolStateMachine(5,"h2","./db/","DNSPackets"); //4
+		DBConnection dbConnect = null;
 		try {
-			psm.dbConnect.createSchema(psm.dbConnect.getDBName());
+			dbConnect = new DBConnection();
+			Connection connection = dbConnect.makeConnection();
+			dbConnect.createSchema(dbConnect.getDBName());
 			//dbConnect.dropTable("Response");
 			//dbConnect.dropTable("Referral");
 			//dbConnect.dropTable("Query");
-			psm.dbConnect.dropTable("Packets");
+			dbConnect.dropTable("Packets");
 			
-			psm.dbConnect.createTable("Packets","TIME_STAMP BIGINT, "+"TRANSACTION_ID VARCHAR(255), "+"TYPE_OF_PACKET VARCHAR(255), "+"TYPE_OF_QUERY SMALLINT, "+"AUTH_RESPONSE BOOLEAN, "+"RECURSION_DESIRED BOOLEAN, "+"RECURSION_AVAILABLE BOOLEAN, "+"RESPONSE_CODE SMALLINT, "+"QUESTION_COUNT SMALLINT, "+"RESPONSE_COUNT SMALLINT, "+"AUTHORITY_COUNT SMALLINT, "+"ADDITIONAL_COUNT SMALLINT, "+"QUESTION_NAME VARCHAR(255), "+"QUESTION_TYPE SMALLINT, "+"QUESTION_CLASS SMALLINT, "+"PAYLOAD BINARY(1000)");
+			dbConnect.createTable("Packets","TIME_STAMP BIGINT, "+"TRANSACTION_ID VARCHAR(255), "+"TYPE_OF_PACKET VARCHAR(255), "+"TYPE_OF_QUERY SMALLINT, "+"AUTH_RESPONSE BOOLEAN, "+"RECURSION_DESIRED BOOLEAN, "+"RECURSION_AVAILABLE BOOLEAN, "+"RESPONSE_CODE SMALLINT, "+"QUESTION_COUNT SMALLINT, "+"RESPONSE_COUNT SMALLINT, "+"AUTHORITY_COUNT SMALLINT, "+"ADDITIONAL_COUNT SMALLINT, "+"QUESTION_NAME VARCHAR(255), "+"QUESTION_TYPE SMALLINT, "+"QUESTION_CLASS SMALLINT, "+"PAYLOAD BINARY(1000)");
 			//dbConnect.createTable("Query","TRANSACTION_ID VARCHAR(255) PRIMARY KEY, "+"TIME_STAMP BIGINT, "+"PACKET OTHER");
 			//dbConnect.createTable("Response","TRANSACTION_ID VARCHAR(255), "+"PACKET OTHER");//, "+"FOREIGN KEY fk (TRANSACTION_ID) REFERENCES "+dbConnect.getDBName()+".Query(TRANSACTION_ID))");
 			//dbConnect.createTable("Referral","TRANSACTION_ID VARCHAR(255), "+"TIME_STAMP BIGINT");
@@ -37,6 +41,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		ProtocolStateMachine psm = new ProtocolStateMachine(5, dbConnect);
 		//Class<?> act;
 		try {
 			//act = Class.forName("Activity");

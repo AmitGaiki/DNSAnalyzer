@@ -2,6 +2,7 @@ package entity;
 
 import java.sql.*;
 import java.util.Properties;
+import utils.ConfigProperties;
 
 
 /**
@@ -12,27 +13,24 @@ public class DBConnection {
 	
 	private Connection connect;
 	private Properties connProperties;
+	private ConfigProperties configProperties;
+	private String driver;
+	private String url;
+	private String dbName;
 	private String username;
 	private String password;
-	private String dbms;
-	private String dbname;
-	private String location;
 	
 	/**
-	 * use this constructor to provide all parameters including username and password
-	 * @param usnm username to be used in database
-	 * @param pswd password for accessing database
-	 * @param dbms name of database system to be used
-	 * @param location location to create database file
-	 * @param dbname name of database file
+	 * use this constructor to connect using parameters from properties file
 	 */
-	public DBConnection(String usnm,String pswd,String dbms,String location,String dbname){
+	public DBConnection(){
 		this.connect  = null;
-		this.username = usnm;
-		this.password = pswd;
-		this.dbms = dbms;
-		this.location = location;
-		this.dbname = dbname;
+		this.configProperties = new ConfigProperties();
+		this.driver = configProperties.getDbDriver();
+		this.url = configProperties.getDbUrl();
+		this.dbName = configProperties.getDbName();
+		this.username = configProperties.getUsername();
+		this.password = configProperties.getPassword();
 	}
 	
 	/**
@@ -43,11 +41,20 @@ public class DBConnection {
 	 */
 	public DBConnection(String dbms,String location,String dbname){
 		this.connect  = null;
-		this.username = "";
-		this.password = "";
-		this.dbms = dbms;
-		this.location = location;
-		this.dbname = dbname;
+		this.configProperties = new ConfigProperties();
+		this.driver = configProperties.getDbDriver();
+		this.url = "jdbc:" + dbms + ":" + location+ dbname +";create=true";
+		this.dbName = dbname;
+		this.username = configProperties.getUsername();
+		this.password = configProperties.getPassword();
+	}
+		
+	/**
+	 * 
+	 * @return connection object to be used for all CRUD operations
+	 */
+	public Connection getConnection(){
+		return this.connect;
 	}
 	
 	/**
@@ -55,15 +62,7 @@ public class DBConnection {
 	 * @return name of database file
 	 */
 	public String getDBName(){
-		return this.dbname;
-	}
-	
-	/**
-	 * 
-	 * @return connection object to be used for all CRUD operations
-	 */
-	public Connection getConnect(){
-		return this.connect;
+		return this.dbName;
 	}
 	
 	/**
@@ -72,26 +71,26 @@ public class DBConnection {
 	public void setProperties(){
 		connProperties.setProperty("Username", this.username);
 		connProperties.setProperty("Password", this.password);
-		connProperties.setProperty("DBMS", this.dbms);
-		connProperties.setProperty("DBName",this.dbname);
+		connProperties.setProperty("Url", this.url);
+		connProperties.setProperty("DBName",this.dbName);
 	}
 	
 	/**
 	 * 
 	 * @return connection object after making successful connection to database
 	 */
-	public Connection getConnection(){
+	public Connection makeConnection(){
 		connect = null;
 		connProperties = new Properties();
-		this.setProperties();
+//		this.setProperties();
 		try {
-			Class.forName("org.h2.Driver");
+			Class.forName(this.driver);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			connect = DriverManager.getConnection("jdbc:" + this.dbms + ":" +this.location+this.dbname +";create=true",this.username,this.password);
+			connect = DriverManager.getConnection(this.url, this.username, this.password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,7 +124,7 @@ public class DBConnection {
 		Statement stmt = null;
 	    try {
 	        stmt = this.connect.createStatement();
-	        stmt.executeUpdate("DROP TABLE IF EXISTS "+this.dbname+"."+tableName);
+	        stmt.executeUpdate("DROP TABLE IF EXISTS "+this.dbName+"."+tableName);
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
@@ -145,7 +144,7 @@ public class DBConnection {
 	    try {
 	        stmt = this.connect.createStatement();
 	        //stmt.executeUpdate(createString);
-	        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS "+this.dbname+"."+tableName+"("+columns+")");
+	        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS "+this.dbName+"."+tableName+"("+columns+")");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
@@ -165,7 +164,7 @@ public class DBConnection {
 	    	String QMarks = "?";
 	    	for(i = 0;i < parameters.length - 1;i++)
 	    		QMarks = QMarks + ",?";
-	    	String populateTable = "INSERT INTO "+this.dbname+"."+tableName+" VALUES(" +QMarks+ ")";
+	    	String populateTable = "INSERT INTO "+this.dbName+"."+tableName+" VALUES(" +QMarks+ ")";
 	        pstmt = this.connect.prepareStatement(populateTable);
 	        for(i = 1;i <= parameters.length;i++)
 	        	pstmt.setObject(i, parameters[i-1]);
@@ -191,7 +190,7 @@ public class DBConnection {
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
 	    try {
-	    	String retrieve = "SELECT "+columns+" FROM "+this.dbname+"."+tableName+" WHERE "+conditions;
+	    	String retrieve = "SELECT "+columns+" FROM "+this.dbName+"."+tableName+" WHERE "+conditions;
 	        pstmt = this.connect.prepareStatement(retrieve);
 	       // for(int i = 1;i <= parameters.length;i++)
 	        //	pstmt.setObject(i, parameters[i-1]);

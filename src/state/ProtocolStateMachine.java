@@ -1,7 +1,7 @@
 package state;
 
-import entity.Hasher;
 import entity.DBConnection;
+import entity.Hasher;
 import pcap.Packet;
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ public class ProtocolStateMachine {
 	 * @param location location of database file to be stored.
 	 * @param dbname name of the database that will be created
 	 */
-	public ProtocolStateMachine(int nost,String dbms,String location,String dbname){
+	public ProtocolStateMachine(int nost, DBConnection dbConnect){
 		stateMachine = new StateMachine(nost);
 		transit = new Transition();
 		stateMachine.addObserver(transit);
@@ -35,8 +35,7 @@ public class ProtocolStateMachine {
 		Queries.clear();
 		responsePackets = new Hasher();
 		responsePackets.clear();
-		dbConnect = new DBConnection(dbms,location,dbname);
-		dbConnect.getConnection();
+		this.dbConnect = dbConnect;
 	}
 
 	/**

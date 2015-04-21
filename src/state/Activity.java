@@ -8,8 +8,6 @@ import state.StateMachine;
 import state.ProtocolStateMachine;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.util.ArrayList;
 
 
 public class Activity {
@@ -46,7 +44,7 @@ public class Activity {
 			//ProtocolStateMachine.Queries.put(trID, Long.valueOf(time));
 			System.out.println(trID + " " + time);
 			try {
-				rs = ProtocolStateMachine.dbConnect.getConnect().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();
+				rs = ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();
 				//rs1 = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TRANSACTION_ID", "TRANSACTION_ID="+trID+"AND TYPE_OF_PACKET=\'Query\'");
 				if(!rs.first())
 					//ProtocolStateMachine.dbConnect.populateTable("Query",trID,new Long(time),ProtocolStateMachine.currentPacket);
@@ -60,7 +58,7 @@ public class Activity {
 		}
 		else{
 			try {
-				rs = ProtocolStateMachine.dbConnect.getConnect().prepareStatement("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery(); //ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+trID);
+				rs = ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery(); //ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+trID);
 				//rs2 = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TIME_STAMP", "TRANSACTION_ID="+trID+"AND TYPE_OF_PACKET='Query'");
 				if(rs.first()){
 					time = rs.getLong("TIME_STAMP");
@@ -98,7 +96,7 @@ public class Activity {
 		byte[] payload = PayloadRetriever.getUDPPayload(ProtocolStateMachine.currentPacket);
 		String trID = DNSWrapper.getTransactionID(payload);
 		try {
-			ResultSet rs = ProtocolStateMachine.dbConnect.getConnect().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+t_ID);
+			ResultSet rs = ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+t_ID);
 			//ResultSet rs = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TRANSACTION_ID", "TRANSACTION_ID="+trID+"AND TYPE_OF_PACKET='Query'");
 			if(rs.first()){	 //Extra check;not necessary
 				if(DNSWrapper.getResponseCode(payload) == 0 && (DNSWrapper.getResourceRecordType(payload, DNSWrapper.getEndOfQuestionSection(payload)) != 6)){
@@ -203,7 +201,7 @@ public class Activity {
 		ResultSet rs;
 		if(DNSWrapper.isResponse(payload)){
 			try {
-				rs = ProtocolStateMachine.dbConnect.getConnect().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+trID);
+				rs = ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Query "+"WHERE TRANSACTION_ID="+trID);
 				//rs1 = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TRANSACTION_ID", "TRANSACTION_ID="+trID+"AND TYPE_OF_PACKET='Query'");
 				if(rs.first()){	
 					//ProtocolStateMachine.dbConnect.populateTable("Response",trID,ProtocolStateMachine.currentPacket);
@@ -219,7 +217,7 @@ public class Activity {
 		}
 		else{
 			try {
-				rs =  ProtocolStateMachine.dbConnect.getConnect().prepareStatement("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'"+" ORDER BY TIME_STAMP DESC").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Referral "+"WHERE TRANSACTION_ID="+trID+" ORDER BY TIME_STAMP DESC");
+				rs =  ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'"+" ORDER BY TIME_STAMP DESC").executeQuery();//ProtocolStateMachine.dbConnect.retrieveResultSet("SELECT TIME_STAMP FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Referral "+"WHERE TRANSACTION_ID="+trID+" ORDER BY TIME_STAMP DESC");
 				//rs2 = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TIME_STAMP", "TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET='Referral' ORDER BY TIME_STAMP DESC");
 				if(rs.first()){
 					time = rs.getLong("TIME_STAMP");
