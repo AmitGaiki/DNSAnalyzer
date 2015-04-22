@@ -1,5 +1,6 @@
 package state;
 
+import entity.PacketEntity;
 import pcap.PcapReader;
 import pcap.DNSWrapper;
 import pcap.PayloadRetriever;
@@ -8,6 +9,7 @@ import state.StateMachine;
 import state.ProtocolStateMachine;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import repository.PacketRepository;
 
 
 public class Activity {
@@ -39,21 +41,36 @@ public class Activity {
 		byte[] payload = PayloadRetriever.getUDPPayload(ProtocolStateMachine.currentPacket);
 		String trID = DNSWrapper.getTransactionID(payload);
 		ResultSet rs;
+		boolean isPresent;
 		if(DNSWrapper.isQuery(payload)){
 			time = ProtocolStateMachine.currentPacket.getCaptureHeader().timestampInMillis();
 			//ProtocolStateMachine.Queries.put(trID, Long.valueOf(time));
 			System.out.println(trID + " " + time);
-			try {
-				rs = ProtocolStateMachine.dbConnect.getConnection().prepareStatement("SELECT TRANSACTION_ID FROM "+ProtocolStateMachine.dbConnect.getDBName()+".Packets "+"WHERE TRANSACTION_ID="+trID+" AND TYPE_OF_PACKET=\'Query\'").executeQuery();
-				//rs1 = ProtocolStateMachine.dbConnect.retrieveResultSet("Packets", "TRANSACTION_ID", "TRANSACTION_ID="+trID+"AND TYPE_OF_PACKET=\'Query\'");
-				if(!rs.first())
-					//ProtocolStateMachine.dbConnect.populateTable("Query",trID,new Long(time),ProtocolStateMachine.currentPacket);
-					ProtocolStateMachine.dbConnect.populateTable("Packets",new Long(time),trID,"Query",DNSWrapper.gettypeOfQuery(payload),DNSWrapper.isResponseServerAuthoritative(payload),DNSWrapper.isRecursionDesired(payload),DNSWrapper.isRecursionAvailable(payload),DNSWrapper.getResponseCode(payload),DNSWrapper.getQuestionCount(payload),DNSWrapper.getAnswerCount(payload),DNSWrapper.getAuthorityRecordCount(payload),DNSWrapper.getAdditionalRecordCount(payload),DNSWrapper.getQuestionName(payload),DNSWrapper.getRecordTypeToBeReturned(payload),DNSWrapper.getQuestionClass(payload),payload);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			PacketRepository packetRepository = new PacketRepository(ProtocolStateMachine.dbConnect.getConnection());
+			packetRepository.setdBConnection(ProtocolStateMachine.dbConnect);
+			isPresent = packetRepository.findByTransactionIdAndPacketType(trID, "Query");
+			
+			if(!isPresent){
+				PacketEntity packetEntity = new PacketEntity();
+				packetEntity.setTimeStamp(new Long(time));
+				packetEntity.setTransactionId(trID);
+				packetEntity.setPacketType("Query");
+				packetEntity.setQueryType(DNSWrapper.gettypeOfQuery(payload));
+				packetEntity.setAuthResponse(DNSWrapper.isResponseServerAuthoritative(payload));
+				packetEntity.setRecursionDesired(DNSWrapper.isRecursionDesired(payload));
+				packetEntity.setRecursionAvailable(DNSWrapper.isRecursionAvailable(payload));
+				packetEntity.setResponseCode(DNSWrapper.getResponseCode(payload));
+				packetEntity.setQuestionCount(DNSWrapper.getQuestionCount(payload));
+				packetEntity.setResponseCount(DNSWrapper.getAnswerCount(payload));
+				packetEntity.setAuthCount(DNSWrapper.getAuthorityRecordCount(payload));
+				packetEntity.setAdditionalCount(DNSWrapper.getAdditionalRecordCount(payload));
+				packetEntity.setQuestionName(DNSWrapper.getQuestionName(payload));
+				packetEntity.setQuestionType(DNSWrapper.getRecordTypeToBeReturned(payload));
+				packetEntity.setQuestionClass(DNSWrapper.getQuestionClass(payload));
+				packetEntity.setPayload(payload);
+				
+				packetRepository.save(packetEntity);
 			}
-			//ProtocolStateMachine.responsePackets.put(DNSWrapper.getTransactionID(payload), new ArrayList<Packet>());
 			SM.setCurrentState(new TransitionSupport(SM.getCurrentState(),SM.getState("A")));
 		}
 		else{
